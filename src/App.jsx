@@ -38,7 +38,6 @@ export default function App() {
   }
 
   function handleRadioChange(e) {
-    setUkus(e.target.value);
     if (e.target.value == "us") {
       setTemperature("94 fahrenheit");
       setWeight("300 pounds");
@@ -46,6 +45,7 @@ export default function App() {
       setTemperature("34 centigrade");
       setWeight("21 stone");
     }
+    setUkus(e.target.value);
   }
 
   return (
