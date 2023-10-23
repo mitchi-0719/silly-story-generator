@@ -5,8 +5,8 @@ export default function App() {
   const [xItem, setXItem] = useState("");
   const [yItem, setYItem] = useState("");
   const [zItem, setZItem] = useState("");
-  const [name, setName] = useState("bob");
-  const [displayName, setDisplayName] = useState("bob");
+  const [name, setName] = useState("");
+  const [displayName, setDisplayName] = useState("Bob");
   const [ukus, setUkus] = useState("us");
   const [weight, setWeight] = useState("300 ponds");
   const [temperature, setTemperature] = useState("94 fahrenheit");
