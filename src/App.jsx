@@ -8,8 +8,6 @@ export default function App() {
   const [name, setName] = useState("");
   const [displayName, setDisplayName] = useState("Bob");
   const [ukus, setUkus] = useState("us");
-  const [weight, setWeight] = useState("300 ponds");
-  const [temperature, setTemperature] = useState("94 fahrenheit");
 
   const xItems = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
   const yItems = ["the soup kitchen", "Disneyland", "the White House"];
@@ -30,7 +28,6 @@ export default function App() {
     setZItem(randomValueFromArray(zItems));
     setDisplayName(name);
     setShowStory(true);
-    console.log(ukus)
   }
 
   function handleChange(e) {
@@ -38,13 +35,6 @@ export default function App() {
   }
 
   function handleRadioChange(e) {
-    if (e.target.value == "us") {
-      setTemperature("94 fahrenheit");
-      setWeight("300 pounds");
-    } else {
-      setTemperature("34 centigrade");
-      setWeight("21 stone");
-    }
     setUkus(e.target.value);
   }
 
@@ -75,7 +65,7 @@ export default function App() {
       </div>
       {showStory && (
         <p>
-          It was {temperature} outside, so {xItem} went for a walk. When they got to {yItem}, they stared in horror for a few moments, then {zItem}. {displayName} saw the whole thing, but was not surprised — {xItem} weighs {weight}, and it was a hot day.
+          It was {ukus === "us" ? "94 fahrenheit" : "34 centigrade"} outside, so {xItem} went for a walk. When they got to {yItem}, they stared in horror for a few moments, then {zItem}. {displayName} saw the whole thing, but was not surprised — {xItem} weighs {ukus === "us" ? "300 pounds" : "21 stone"}, and it was a hot day.
         </p>
       )}
     </>
