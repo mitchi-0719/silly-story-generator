@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function App() {
   const [showStory, setShowStory] = useState(false);
   const [xItem, setXItem] = useState("");
   const [yItem, setYItem] = useState("");
   const [zItem, setZItem] = useState("");
-  const [name, setName] = useState("");
-  const [displayName, setDisplayName] = useState("Bob");
   const [ukus, setUkus] = useState("us");
+  const [story, setStory] = useState("");
+  const name = useRef("");
 
   const xItems = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
   const yItems = ["the soup kitchen", "Disneyland", "the White House"];
@@ -22,27 +22,33 @@ export default function App() {
     return array[random];
   }
 
-  function handleClick() {
-    setXItem(randomValueFromArray(xItems));
-    setYItem(randomValueFromArray(yItems));
-    setZItem(randomValueFromArray(zItems));
-    setDisplayName(name);
-    setShowStory(true);
-  }
-
-  function handleChange(e) {
-    setName(e.target.value);
+  function handleClick(e) {
+    e.preventDefault();
+    setData();
+    generateStory();
   }
 
   function handleRadioChange(e) {
     setUkus(e.target.value);
   }
 
+  function setData() {
+    setXItem(randomValueFromArray(xItems));
+    setYItem(randomValueFromArray(yItems));
+    setZItem(randomValueFromArray(zItems));
+    setShowStory(true);
+  }
+
+  function generateStory() {
+    const newStory = `It was ${ukus === "us" ? "94 fahrenheit" : "34 centigrade"} outside, so ${xItem} went for a walk. When they got to ${yItem}, they stared in horror for a few moments, then ${zItem}. ${name.current.value === "" ? "Bob" : name.current.value} saw the whole thing, but was not surprised — ${xItem} weighs ${ukus === "us" ? "300 pounds" : "21 stone"}, and it was a hot day.`
+    setStory(newStory);
+  }
+
   return (
     <>
       <div>
         <label htmlFor="customname">Enter custom name:</label>
-        <input type="text" placeholder="" onChange={handleChange} />
+        <input type="text" placeholder="" ref={name} />
       </div>
       <div>
         <label htmlFor="us">US</label>
@@ -65,7 +71,7 @@ export default function App() {
       </div>
       {showStory && (
         <p>
-          It was {ukus === "us" ? "94 fahrenheit" : "34 centigrade"} outside, so {xItem} went for a walk. When they got to {yItem}, they stared in horror for a few moments, then {zItem}. {displayName} saw the whole thing, but was not surprised — {xItem} weighs {ukus === "us" ? "300 pounds" : "21 stone"}, and it was a hot day.
+          {story}
         </p>
       )}
     </>
